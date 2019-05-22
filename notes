@@ -1,0 +1,24 @@
+Diary - what does it do and therefore what should I test?
+
+A diary can add a new entry to a list given some parameters
+A diary can create an index of the diary entries
+An entry doesn't currently do anything but a diary is dependent on it
+
+
+
+Hello - what does it do and therefore what should I test?
+
+EmailClient just creates a new message - dependent on Message
+Message can send an email so we can call Message.send
+SayHelloToMyLittleFriend.run will create a new EmailClient and then send that
+
+Sooo.. to test the "run" method, we need to:
+- have a double for a Message so that we can send a message without that class
+- have a double for the EmailClient class so that we can pass in the message_class_double
+
+
+message_double = double :message
+message_class_double = double :message_class, new: message_double
+emailclient_class_double = double :emailclient_class, new: message_class_double
+
+say_hello = SayHelloToMyLittleFriend.new(emailclient_class_double)
